@@ -43,7 +43,6 @@ def fetch_movie(name):
 def use_imdb_scrapping(extracted_name):
     title_year, rating = fetch_movie(extracted_name)
     rating = 'R-' + str(rating)
-    print(title_year, '', rating)
     title = get_name_from_folder(title_year)
-    year = get_year_from_folder(title_year)
+    is_year_present, year = get_year_from_folder(title_year)
     return title, year, rating

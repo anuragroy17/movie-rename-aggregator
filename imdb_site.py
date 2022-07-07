@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from common_utils import get_year_from_folder, get_name_from_folder
 
 
 def imdb_url(path):
@@ -27,6 +28,7 @@ def parse_rating(page_contents):
         rating = 'NA'
     else:
         rating = rating.text
+    return rating
 
 
 def fetch_movie(name):
@@ -41,4 +43,7 @@ def fetch_movie(name):
 def use_imdb_scrapping(extracted_name):
     title_year, rating = fetch_movie(extracted_name)
     rating = 'R-' + str(rating)
-    return title_year, '', rating
+    print(title_year, '', rating)
+    title = get_name_from_folder(title_year)
+    year = get_year_from_folder(title_year)
+    return title, year, rating

@@ -54,7 +54,7 @@ def compare_titles(local, fetched):
 def user_decision_for_rename(name, title):
     letter = None
     while not (letter == 'n' or letter == 'y'):
-        letter = input('> Rename \'' + name +
+        letter = input('>>> Rename \'' + name +
                        '\' to \'' + title + '\'? (y/n) ')
     return letter == 'y'
 
@@ -62,11 +62,10 @@ def user_decision_for_rename(name, title):
 def user_decision_for_service():
     letter = None
     while not (letter == 'a' or letter == 'b'):
-        letter = input('''> use which service?
+        letter = input('''>>> use which service?
         a) Imdb Page Scrapping (faster)
-        b) Cinemagoer ImdbPy
-        
-        Select a/b ''')
+        b) Cinemagoer ImdbPy        
+Select (a/b) ''')
     return letter
 
 

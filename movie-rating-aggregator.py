@@ -3,12 +3,16 @@ from common_utils import *
 from folder_utils import *
 from imdb_site import *
 from imdb_py import *
+from csv_util import *
 
 ##### START ######
 service_decision = user_decision_for_service()
 
 print_line('Input folder', 'Year', 'Title', 'Output folder', 'Action')
 print('-' * (37 * 3 + 14))
+
+headers = ['Input folder', 'Year', 'Title', 'Output folder', 'Action']
+rows = []
 
 for folder in folders():
     # remove BRRip/DvdRip from end of name
@@ -20,6 +24,8 @@ for folder in folders():
         year = ''
         action = 'Already Rated'
         print_change(folder, '', '', '', action)
+        row = [folder, '', '', '', action]
+        rows.append(row)
         continue
 
     extracted_name = get_name_from_folder(raw_name)
@@ -56,6 +62,10 @@ for folder in folders():
         year = ''
         action = 'Not found'
     print_change(folder, year, title, rename_to, action)
+    row = [folder, year, title, rename_to, action]
+    rows.append(row)
+
+write_to_csv(headers, rows)
 
 print('')
 os.system('pause')
@@ -63,3 +73,4 @@ os.system('pause')
 
 # ToDo
 # 1) Use any directory (take input from user)
+# 2) create single file executable

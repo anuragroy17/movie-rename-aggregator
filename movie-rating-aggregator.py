@@ -32,7 +32,8 @@ for folder in folders():
     is_year_present, year_from_folder = get_year_from_folder(raw_name)
 
     if service_decision == 'a':
-        title, year, rating = use_imdb_scrapping(extracted_name)
+        title, year, rating = use_imdb_scrapping(
+            extracted_name, is_year_present, year_from_folder)
     elif service_decision == 'b':
         title, year, rating = use_imdbpy(
             extracted_name, is_year_present, year_from_folder)

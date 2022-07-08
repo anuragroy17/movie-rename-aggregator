@@ -31,8 +31,9 @@ def parse_rating(page_contents):
     return rating
 
 
-def fetch_movie(name):
-    url = imdb_url(name)
+def fetch_movie(name, is_year_present, year_from_folder):
+    search_year = " (" + year_from_folder + ")" if is_year_present else ''
+    url = imdb_url(name + search_year)
     response = requests.get(url)
     url, title_year = parse_search_results(response.text)
     response = requests.get(url)
@@ -40,8 +41,9 @@ def fetch_movie(name):
     return title_year, rating
 
 
-def use_imdb_scrapping(extracted_name):
-    title_year, rating = fetch_movie(extracted_name)
+def use_imdb_scrapping(extracted_name, is_year_present, year_from_folder):
+    title_year, rating = fetch_movie(
+        extracted_name, is_year_present, year_from_folder)
     rating = 'R-' + str(rating)
     title = get_name_from_folder(title_year)
     is_year_present, year = get_year_from_folder(title_year)

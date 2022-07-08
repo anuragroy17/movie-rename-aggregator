@@ -12,6 +12,8 @@ def parse_search_results(page_contents):
     doc = BeautifulSoup(page_contents, 'html.parser')
     parent = doc.find_all('td', {'class': 'result_text'})
     base_url = 'https://www.imdb.com'
+    movie_title = ''
+    movie_url = ''
     for item in parent:
         a = item.find('a')
         movie_title = item.text

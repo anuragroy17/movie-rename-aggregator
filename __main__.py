@@ -18,25 +18,32 @@ for folder in folders():
     # remove BRRip/DvdRip from end of name
     raw_name, rip = strip_quality(folder)
 
+    # check for git and python folders
+    if raw_name == '.git' or raw_name == '__pycache__':
+        continue
+
     # check if movie is already rated
     if bool(re.search('R-[0-9]', raw_name)):
-        title = ''
-        year = ''
-        action = 'Already Rated'
-        print_change(folder, '', '', '', action)
-        row = [folder, '', '', '', action]
-        rows.append(row)
+        # title = ''
+        # year = ''
+        # action = 'Already Rated'
+        # print_change(folder, '', '', '', action)
+        # row = [folder, '', '', '', action]
+        # rows.append(row)
         continue
 
     extracted_name = get_name_from_folder(raw_name)
     is_year_present, year_from_folder = get_year_from_folder(raw_name)
 
-    if service_decision == 'a':
-        title, year, rating = use_imdb_scrapping(
-            extracted_name, is_year_present, year_from_folder)
-    elif service_decision == 'b':
-        title, year, rating = use_imdbpy(
-            extracted_name, is_year_present, year_from_folder)
+    try:
+        if service_decision == 'a':
+            title, year, rating = use_imdb_scrapping(
+                extracted_name, is_year_present, year_from_folder)
+        elif service_decision == 'b':
+            title, year, rating = use_imdbpy(
+                extracted_name, is_year_present, year_from_folder)
+    except:
+        continue
 
     rename_to = ''
     action = 'Error'

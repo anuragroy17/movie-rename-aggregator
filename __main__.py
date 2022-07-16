@@ -15,15 +15,16 @@ headers = ['Input folder', 'Year', 'Title', 'Output folder', 'Action']
 rows = []
 
 for folder in folders():
-    # remove BRRip/DvdRip from end of name
+    #### remove BRRip/DvdRip from end of name ####
     raw_name, rip = strip_quality(folder)
 
-    # check for git and python folders
+    #### check for git and python folders ####
     if raw_name == '.git' or raw_name == '__pycache__':
         continue
 
-    # check if movie is already rated
+    #### check if movie is already rated ####
     if bool(re.search('R-[0-9]', raw_name)):
+        #### Uncomment if 'already rated' names are are required in csv ###
         # title = ''
         # year = ''
         # action = 'Already Rated'
@@ -81,4 +82,4 @@ os.system('pause')
 
 # ToDo
 # 1) Use any directory (take input from user)
-# 2) create single file executable
+# 2) create single file executable (workaround - use .zip file for alternative)
